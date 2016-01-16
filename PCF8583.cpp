@@ -27,7 +27,8 @@
 
 
 #include <Arduino.h>
-#include <Wire.h>
+#include <../Wire/Wire.h>
+#include <avr/pgmspace.h>
 #include "PCF8583.h"
 
 namespace {
@@ -36,7 +37,7 @@ namespace {
   }
 
   byte DayOfWeek(const PCF8583 &now) {
-    static char PROGMEM MonthTable[24] = {0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5, -1, 2, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5};
+    const char MonthTable[24] PROGMEM = {0, 3, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5, -1, 2, 3, 6, 1, 4, 6, 2, 5, 0, 3, 5};
     byte y = now.year % 100, c = 6 - 2 * ((now.year / 100) % 4); 
     return (now.day + pgm_read_byte_near(MonthTable + IsLeapYear(now.year) * 12 + now.month - 1) + y + (y / 4) + c) % 7;
   }
@@ -53,9 +54,8 @@ PCF8583::PCF8583(int device_address, byte config_register) {
   Wire.begin();
   
   Wire.beginTransmission(address);
-  Wire.write(config_register);   // stop counting, don't mask
+  Wire.write(config_register);   //send the give config register
   Wire.endTransmission();
-  
 }
 
 // initialization 

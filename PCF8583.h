@@ -72,6 +72,7 @@ class PCF8583 {
     int alarm_day;
 
     PCF8583(int device_address);
+    PCF8583(int device_address, byte config_register);
     void init ();
     
     void get_time();
