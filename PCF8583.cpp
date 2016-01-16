@@ -48,6 +48,16 @@ PCF8583::PCF8583(int device_address) {
   Wire.begin();
 }
 
+PCF8583::PCF8583(int device_address, byte config_register) {
+  address = device_address >> 1;  // convert to 7 bit so Wire doesn't choke
+  Wire.begin();
+  
+  Wire.beginTransmission(address);
+  Wire.write(config_register);   // stop counting, don't mask
+  Wire.endTransmission();
+  
+}
+
 // initialization 
 void PCF8583::init()
 {
