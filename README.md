@@ -6,7 +6,7 @@ This version extends the original one by a 2nd constructor to support a differen
 
 # Usage
 
-`
+```
     //init the PCF8583 & the TWI interface.
     //Adress is either 0xA0 (pin A0 -> GND) or 0xA1 (pin A0 -> VCC)
     PCF8583 pcf(0xA0);
@@ -26,13 +26,13 @@ This version extends the original one by a 2nd constructor to support a differen
 
     //Update each value of the PCF object
     pcf.hour = 14;
-    pcf.minute = 30;
-    pcf.second = 0;
-    pcf.year = 2009;
-    pcf.month = 9;
-    pcf.day = 12;
+    pcf.minute = 30;
+    pcf.second = 0;
+    pcf.year = 2009;
+    pcf.month = 9;
+    pcf.day = 12;
     
     //set the PCF8583 internal date/time
     pcf.set_time();
 
-`
+```
